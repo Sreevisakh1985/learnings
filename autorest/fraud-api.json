@@ -1,0 +1,1359 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Fraud Service",
+    "description": "Patreon's Fraud API ",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/approvals/payment_instrument/": {
+      "post": {
+        "tags": [
+          "approvals"
+        ],
+        "summary": "Check Payment Instrument",
+        "operationId": "check_payment_instrument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentInstrument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Approval"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/approvals/payout/": {
+      "post": {
+        "tags": [
+          "approvals"
+        ],
+        "summary": "Check Payout",
+        "operationId": "check_payout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payout"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutApproval"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/user": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "User Event",
+        "operationId": "user_event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FraudEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthcheck": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check",
+        "operationId": "health_check",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Approval": {
+        "title": "Approval",
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          }
+        }
+      },
+      "BankAccount": {
+        "title": "BankAccount",
+        "required": [
+          "token",
+          "account_holder_name",
+          "account_holder_email",
+          "bank_name"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "title": "Token",
+            "type": "string"
+          },
+          "account_holder_name": {
+            "title": "Account Holder Name",
+            "type": "string"
+          },
+          "account_holder_email": {
+            "title": "Account Holder Email",
+            "type": "string"
+          },
+          "bank_name": {
+            "title": "Bank Name",
+            "type": "string"
+          }
+        }
+      },
+      "BaseModel": {
+        "title": "BaseModel",
+        "type": "object",
+        "properties": {}
+      },
+      "Card": {
+        "title": "Card",
+        "required": [
+          "token",
+          "type",
+          "bin_number",
+          "card_holder_name",
+          "card_holder_email",
+          "expiry_month",
+          "expiry_year",
+          "postal_code"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "title": "Token",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "bin_number": {
+            "title": "Bin Number",
+            "type": "string"
+          },
+          "card_holder_name": {
+            "title": "Card Holder Name",
+            "type": "string"
+          },
+          "card_holder_email": {
+            "title": "Card Holder Email",
+            "type": "string"
+          },
+          "expiry_month": {
+            "title": "Expiry Month",
+            "type": "integer"
+          },
+          "expiry_year": {
+            "title": "Expiry Year",
+            "type": "integer"
+          },
+          "postal_code": {
+            "title": "Postal Code",
+            "type": "string"
+          },
+          "card_last4": {
+            "title": "Card Last4",
+            "type": "string"
+          },
+          "finger_print": {
+            "title": "Finger Print",
+            "type": "string"
+          }
+        }
+      },
+      "FraudEvent": {
+        "title": "FraudEvent",
+        "required": [
+          "user_id",
+          "event"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "integer"
+          },
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "ip": {
+            "title": "Ip",
+            "type": "string"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "browser": {
+            "title": "Browser",
+            "type": "object"
+          },
+          "device_id": {
+            "title": "Device Id",
+            "type": "string"
+          },
+          "user_agent": {
+            "title": "User Agent",
+            "type": "string"
+          },
+          "request_uuid": {
+            "title": "Request Uuid",
+            "type": "string"
+          },
+          "country_iso_code": {
+            "title": "Country Iso Code",
+            "type": "string"
+          },
+          "city_code": {
+            "title": "City Code",
+            "type": "string"
+          },
+          "original_state": {
+            "title": "Original State",
+            "type": "object"
+          },
+          "object_state": {
+            "title": "Object State",
+            "type": "object"
+          },
+          "extra_data": {
+            "title": "Extra Data",
+            "type": "object"
+          },
+          "user_email": {
+            "title": "User Email",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "phone_hash": {
+            "title": "Phone Hash",
+            "type": "string"
+          },
+          "referrer_user_id": {
+            "title": "Referrer User Id",
+            "type": "string"
+          },
+          "campaign_content_id": {
+            "title": "Campaign Content Id",
+            "type": "string"
+          },
+          "campaign_status": {
+            "title": "Campaign Status",
+            "type": "string"
+          },
+          "campaign_profile": {
+            "title": "Campaign Profile",
+            "type": "object"
+          },
+          "campaign_summary": {
+            "title": "Campaign Summary",
+            "type": "string"
+          },
+          "campaign_summary_unsafe": {
+            "title": "Campaign Summary Unsafe",
+            "type": "string"
+          },
+          "campaign_creation_name": {
+            "title": "Campaign Creation Name",
+            "type": "string"
+          },
+          "campaign_pay_per_name": {
+            "title": "Campaign Pay Per Name",
+            "type": "string"
+          },
+          "campaign_one_liner": {
+            "title": "Campaign One Liner",
+            "type": "string"
+          },
+          "campaign_main_video_url": {
+            "title": "Campaign Main Video Url",
+            "type": "string"
+          },
+          "campaign_main_video_embed": {
+            "title": "Campaign Main Video Embed",
+            "type": "string"
+          },
+          "campaign_thanks_video_url": {
+            "title": "Campaign Thanks Video Url",
+            "type": "string"
+          },
+          "campaign_thanks_video_embed": {
+            "title": "Campaign Thanks Video Embed",
+            "type": "string"
+          },
+          "campaign_thanks_msg": {
+            "title": "Campaign Thanks Msg",
+            "type": "string"
+          },
+          "campaign_thanks_msg_unsafe": {
+            "title": "Campaign Thanks Msg Unsafe",
+            "type": "string"
+          },
+          "campaign_is_monthly": {
+            "title": "Campaign Is Monthly",
+            "type": "boolean"
+          },
+          "campaign_is_nsfw": {
+            "title": "Campaign Is Nsfw",
+            "type": "boolean"
+          },
+          "campaign_created_at": {
+            "title": "Campaign Created At",
+            "type": "string"
+          },
+          "campaign_published_at": {
+            "title": "Campaign Published At",
+            "type": "string"
+          },
+          "campaign_reverted_at": {
+            "title": "Campaign Reverted At",
+            "type": "string"
+          },
+          "campaign_is_frozen": {
+            "title": "Campaign Is Frozen",
+            "type": "boolean"
+          },
+          "campaign_is_pre_paid": {
+            "title": "Campaign Is Pre Paid",
+            "type": "boolean"
+          },
+          "campaign_is_cuf": {
+            "title": "Campaign Is Cuf",
+            "type": "boolean"
+          },
+          "campaign_is_plural": {
+            "title": "Campaign Is Plural",
+            "type": "boolean"
+          },
+          "campaign_charge_upfront_enabled_at": {
+            "title": "Campaign Charge Upfront Enabled At",
+            "type": "string"
+          },
+          "campaign_earnings_visibility": {
+            "title": "Campaign Earnings Visibility",
+            "type": "string"
+          },
+          "campaign_display_patron_goals": {
+            "title": "Campaign Display Patron Goals",
+            "type": "string"
+          },
+          "campaign_fee_schedule_id": {
+            "title": "Campaign Fee Schedule Id",
+            "type": "string"
+          },
+          "campaign_age_days": {
+            "title": "Campaign Age Days",
+            "type": "integer"
+          },
+          "campaign_pledge_sum_10_weeks": {
+            "title": "Campaign Pledge Sum 10 Weeks",
+            "type": "number"
+          },
+          "campaign_pledge_sum_1_day": {
+            "title": "Campaign Pledge Sum 1 Day",
+            "type": "number"
+          },
+          "campaign_total_rewards_count": {
+            "title": "Campaign Total Rewards Count",
+            "type": "integer"
+          },
+          "campaign_total_goals_count": {
+            "title": "Campaign Total Goals Count",
+            "type": "integer"
+          },
+          "campaign_total_patron_goals_count": {
+            "title": "Campaign Total Patron Goals Count",
+            "type": "integer"
+          },
+          "current_balance": {
+            "title": "Current Balance",
+            "type": "integer"
+          },
+          "service": {
+            "title": "Service",
+            "type": "string"
+          },
+          "merchant_name": {
+            "title": "Merchant Name",
+            "type": "string"
+          },
+          "fingerprint": {
+            "title": "Fingerprint",
+            "type": "string"
+          },
+          "payment_methods": {
+            "title": "Payment Methods",
+            "type": "array",
+            "items": {}
+          },
+          "login_status": {
+            "title": "Login Status",
+            "type": "string"
+          },
+          "verification_status": {
+            "title": "Verification Status",
+            "type": "string"
+          },
+          "verification_type": {
+            "title": "Verification Type",
+            "type": "string"
+          },
+          "post_content_id": {
+            "title": "Post Content Id",
+            "type": "string"
+          },
+          "post_status": {
+            "title": "Post Status",
+            "type": "string"
+          },
+          "post_type": {
+            "title": "Post Type",
+            "type": "string"
+          },
+          "post": {
+            "title": "Post",
+            "type": "object"
+          },
+          "post_activity_title": {
+            "title": "Post Activity Title",
+            "type": "string"
+          },
+          "post_activity_content": {
+            "title": "Post Activity Content",
+            "type": "string"
+          },
+          "post_comment_count": {
+            "title": "Post Comment Count",
+            "type": "string"
+          },
+          "post_min_cents_pledged_to_view": {
+            "title": "Post Min Cents Pledged To View",
+            "type": "string"
+          },
+          "post_like_count": {
+            "title": "Post Like Count",
+            "type": "string"
+          },
+          "post_link_url": {
+            "title": "Post Link Url",
+            "type": "string"
+          },
+          "post_link_domain": {
+            "title": "Post Link Domain",
+            "type": "string"
+          },
+          "post_link_subject": {
+            "title": "Post Link Subject",
+            "type": "string"
+          },
+          "post_link_description": {
+            "title": "Post Link Description",
+            "type": "string"
+          },
+          "post_link_embed": {
+            "title": "Post Link Embed",
+            "type": "string"
+          },
+          "post_is_paid": {
+            "title": "Post Is Paid",
+            "type": "boolean"
+          },
+          "post_was_posted_by_campaign_owner": {
+            "title": "Post Was Posted By Campaign Owner",
+            "type": "boolean"
+          },
+          "user_name": {
+            "title": "User Name",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          },
+          "currency_code": {
+            "title": "Currency Code",
+            "type": "string"
+          },
+          "expedited_shipping": {
+            "title": "Expedited Shipping",
+            "type": "boolean"
+          },
+          "items": {
+            "title": "Items",
+            "type": "array",
+            "items": {}
+          },
+          "shipping_method": {
+            "title": "Shipping Method",
+            "type": "string"
+          },
+          "is_first_time_buyer": {
+            "title": "Is First Time Buyer",
+            "type": "boolean"
+          },
+          "charge_cadence": {
+            "title": "Charge Cadence",
+            "type": "string"
+          },
+          "creator_user_id": {
+            "title": "Creator User Id",
+            "type": "integer"
+          },
+          "creator_name": {
+            "title": "Creator Name",
+            "type": "string"
+          },
+          "patronage_amount": {
+            "title": "Patronage Amount",
+            "type": "integer"
+          },
+          "campaign_total_patrons": {
+            "title": "Campaign Total Patrons",
+            "type": "integer"
+          },
+          "campaign_total_pledged": {
+            "title": "Campaign Total Pledged",
+            "type": "integer"
+          },
+          "campaign_pledge_ratio": {
+            "title": "Campaign Pledge Ratio",
+            "type": "string"
+          },
+          "reward_pledge_ratio": {
+            "title": "Reward Pledge Ratio",
+            "type": "number"
+          },
+          "reward_pledge_offset": {
+            "title": "Reward Pledge Offset",
+            "type": "number"
+          },
+          "exemptions": {
+            "title": "Exemptions",
+            "type": "array",
+            "items": {}
+          },
+          "creator_exemptions": {
+            "title": "Creator Exemptions",
+            "type": "array",
+            "items": {}
+          },
+          "total_pledge_amount_usd": {
+            "title": "Total Pledge Amount Usd",
+            "type": "integer"
+          },
+          "campaign_owner": {
+            "title": "Campaign Owner",
+            "type": "boolean"
+          },
+          "teammates": {
+            "title": "Teammates",
+            "type": "array",
+            "items": {}
+          },
+          "campaign_age_seconds": {
+            "title": "Campaign Age Seconds",
+            "type": "number"
+          },
+          "campaign_currency_code": {
+            "title": "Campaign Currency Code",
+            "type": "string"
+          },
+          "campaign_has_intro_video": {
+            "title": "Campaign Has Intro Video",
+            "type": "boolean"
+          },
+          "campaign_has_youtube_video_in_about": {
+            "title": "Campaign Has Youtube Video In About",
+            "type": "boolean"
+          },
+          "campaign_id": {
+            "title": "Campaign Id",
+            "type": "integer"
+          },
+          "campaign_is_per_post": {
+            "title": "Campaign Is Per Post",
+            "type": "boolean"
+          },
+          "campaign_launched_age_seconds": {
+            "title": "Campaign Launched Age Seconds",
+            "type": "number"
+          },
+          "campaign_new_pledges_10_week_count": {
+            "title": "Campaign New Pledges 10 Week Count",
+            "type": "integer"
+          },
+          "campaign_new_pledges_10_week_usd": {
+            "title": "Campaign New Pledges 10 Week Usd",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_day_count": {
+            "title": "Campaign New Pledges 1 Day Count",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_day_usd": {
+            "title": "Campaign New Pledges 1 Day Usd",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_hour_count": {
+            "title": "Campaign New Pledges 1 Hour Count",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_hour_usd": {
+            "title": "Campaign New Pledges 1 Hour Usd",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_week_count": {
+            "title": "Campaign New Pledges 1 Week Count",
+            "type": "integer"
+          },
+          "campaign_new_pledges_1_week_usd": {
+            "title": "Campaign New Pledges 1 Week Usd",
+            "type": "integer"
+          },
+          "campaign_new_pledges_5_min_count": {
+            "title": "Campaign New Pledges 5 Min Count",
+            "type": "integer"
+          },
+          "campaign_new_pledges_5_min_usd": {
+            "title": "Campaign New Pledges 5 Min Usd",
+            "type": "integer"
+          },
+          "campaign_page_word_count": {
+            "title": "Campaign Page Word Count",
+            "type": "integer"
+          },
+          "campaign_patrons_fraudsters": {
+            "title": "Campaign Patrons Fraudsters",
+            "type": "integer"
+          },
+          "campaign_patrons_not_fraudsters": {
+            "title": "Campaign Patrons Not Fraudsters",
+            "type": "integer"
+          },
+          "campaign_post_count": {
+            "title": "Campaign Post Count",
+            "type": "integer"
+          },
+          "campaign_reading_grade_level": {
+            "title": "Campaign Reading Grade Level",
+            "type": "number"
+          },
+          "campaign_thanks_word_count": {
+            "title": "Campaign Thanks Word Count",
+            "type": "integer"
+          },
+          "campaign_tier_count": {
+            "title": "Campaign Tier Count",
+            "type": "integer"
+          },
+          "campaign_tier_word_count": {
+            "title": "Campaign Tier Word Count",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "creator_account_age_seconds": {
+            "title": "Creator Account Age Seconds",
+            "type": "number"
+          },
+          "creator_campaigns_followed_count": {
+            "title": "Creator Campaigns Followed Count",
+            "type": "integer"
+          },
+          "creator_email_age_score": {
+            "title": "Creator Email Age Score",
+            "type": "integer"
+          },
+          "creator_email_domain": {
+            "title": "Creator Email Domain",
+            "type": "string"
+          },
+          "creator_email_local_pattern": {
+            "title": "Creator Email Local Pattern",
+            "type": "string"
+          },
+          "creator_email_local_zxcvbn_guesses_log10": {
+            "title": "Creator Email Local Zxcvbn Guesses Log10",
+            "type": "number"
+          },
+          "creator_email_local_zxcvbn_score": {
+            "title": "Creator Email Local Zxcvbn Score",
+            "type": "number"
+          },
+          "creator_external_service_has_discord_oauth": {
+            "title": "Creator External Service Has Discord Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_facebook_oauth": {
+            "title": "Creator External Service Has Facebook Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_instagram_oauth": {
+            "title": "Creator External Service Has Instagram Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_reddit_oauth": {
+            "title": "Creator External Service Has Reddit Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_twitch_oauth": {
+            "title": "Creator External Service Has Twitch Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_twitter_oauth": {
+            "title": "Creator External Service Has Twitter Oauth",
+            "type": "boolean"
+          },
+          "creator_external_service_has_youtube_oauth": {
+            "title": "Creator External Service Has Youtube Oauth",
+            "type": "boolean"
+          },
+          "creator_has_sms_verification": {
+            "title": "Creator Has Sms Verification",
+            "type": "boolean"
+          },
+          "creator_most_recent_ip_address_city": {
+            "title": "Creator Most Recent Ip Address City",
+            "type": "string"
+          },
+          "creator_most_recent_ip_address_country": {
+            "title": "Creator Most Recent Ip Address Country",
+            "type": "string"
+          },
+          "creator_payment_instrument_added_count": {
+            "title": "Creator Payment Instrument Added Count",
+            "type": "integer"
+          },
+          "creator_payouts_10_week_count": {
+            "title": "Creator Payouts 10 Week Count",
+            "type": "integer"
+          },
+          "creator_payouts_10_week_usd": {
+            "title": "Creator Payouts 10 Week Usd",
+            "type": "number"
+          },
+          "creator_payouts_1_day_count": {
+            "title": "Creator Payouts 1 Day Count",
+            "type": "integer"
+          },
+          "creator_payouts_1_day_usd": {
+            "title": "Creator Payouts 1 Day Usd",
+            "type": "integer"
+          },
+          "creator_payouts_1_hour_count": {
+            "title": "Creator Payouts 1 Hour Count",
+            "type": "integer"
+          },
+          "creator_payouts_1_hour_usd": {
+            "title": "Creator Payouts 1 Hour Usd",
+            "type": "integer"
+          },
+          "creator_payouts_1_week_count": {
+            "title": "Creator Payouts 1 Week Count",
+            "type": "integer"
+          },
+          "creator_payouts_1_week_usd": {
+            "title": "Creator Payouts 1 Week Usd",
+            "type": "number"
+          },
+          "creator_payouts_5_min_count": {
+            "title": "Creator Payouts 5 Min Count",
+            "type": "integer"
+          },
+          "creator_payouts_5_min_usd": {
+            "title": "Creator Payouts 5 Min Usd",
+            "type": "integer"
+          },
+          "creator_paypal_instument_local_fuzz_ratio": {
+            "title": "Creator Paypal Instument Local Fuzz Ratio",
+            "type": "integer"
+          },
+          "creator_paypal_instument_matches_email": {
+            "title": "Creator Paypal Instument Matches Email",
+            "type": "boolean"
+          },
+          "creator_paypal_instument_matches_email_domain": {
+            "title": "Creator Paypal Instument Matches Email Domain",
+            "type": "boolean"
+          },
+          "creator_phone_score": {
+            "title": "Creator Phone Score",
+            "type": "integer"
+          },
+          "creator_phone_type": {
+            "title": "Creator Phone Type",
+            "type": "string"
+          },
+          "creator_recent_sift_payment_abuse_score": {
+            "title": "Creator Recent Sift Payment Abuse Score",
+            "type": "number"
+          },
+          "creator_recent_sift_payment_abuse_score_age_seconds": {
+            "title": "Creator Recent Sift Payment Abuse Score Age Seconds",
+            "type": "number"
+          },
+          "creator_recent_sift_payment_abuse_score_reason": {
+            "title": "Creator Recent Sift Payment Abuse Score Reason",
+            "type": "string"
+          },
+          "creator_recent_sift_score_age_seconds": {
+            "title": "Creator Recent Sift Score Age Seconds",
+            "type": "number"
+          },
+          "creator_recent_sift_score_legacy": {
+            "title": "Creator Recent Sift Score Legacy",
+            "type": "number"
+          },
+          "creator_recent_sift_score_reason": {
+            "title": "Creator Recent Sift Score Reason",
+            "type": "string"
+          },
+          "fired_at": {
+            "title": "Fired At",
+            "type": "number"
+          },
+          "ip_address": {
+            "title": "Ip Address",
+            "type": "string"
+          },
+          "ip_address_city": {
+            "title": "Ip Address City",
+            "type": "string"
+          },
+          "ip_address_country": {
+            "title": "Ip Address Country",
+            "type": "string"
+          },
+          "lifetime_payouts_amount_usd": {
+            "title": "Lifetime Payouts Amount Usd",
+            "type": "number"
+          },
+          "lifetime_payouts_count": {
+            "title": "Lifetime Payouts Count",
+            "type": "string"
+          },
+          "patron_account_age_seconds": {
+            "title": "Patron Account Age Seconds",
+            "type": "number"
+          },
+          "patron_campaigns_followed_count": {
+            "title": "Patron Campaigns Followed Count",
+            "type": "integer"
+          },
+          "patron_creator_email_local_fuzz_ratio": {
+            "title": "Patron Creator Email Local Fuzz Ratio",
+            "type": "integer"
+          },
+          "patron_email_domain": {
+            "title": "Patron Email Domain",
+            "type": "string"
+          },
+          "patron_email_local_pattern": {
+            "title": "Patron Email Local Pattern",
+            "type": "string"
+          },
+          "patron_email_local_zxcvbn_guesses_log10": {
+            "title": "Patron Email Local Zxcvbn Guesses Log10",
+            "type": "number"
+          },
+          "patron_email_local_zxcvbn_score": {
+            "title": "Patron Email Local Zxcvbn Score",
+            "type": "integer"
+          },
+          "patron_external_service_has_discord_oauth": {
+            "title": "Patron External Service Has Discord Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_facebook_oauth": {
+            "title": "Patron External Service Has Facebook Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_instagram_oauth": {
+            "title": "Patron External Service Has Instagram Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_reddit_oauth": {
+            "title": "Patron External Service Has Reddit Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_twitch_oauth": {
+            "title": "Patron External Service Has Twitch Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_twitter_oauth": {
+            "title": "Patron External Service Has Twitter Oauth",
+            "type": "boolean"
+          },
+          "patron_external_service_has_youtube_oauth": {
+            "title": "Patron External Service Has Youtube Oauth",
+            "type": "boolean"
+          },
+          "patron_has_campaign": {
+            "title": "Patron Has Campaign",
+            "type": "boolean"
+          },
+          "patron_has_sms_verification": {
+            "title": "Patron Has Sms Verification",
+            "type": "boolean"
+          },
+          "patron_payment_instrument_added_count": {
+            "title": "Patron Payment Instrument Added Count",
+            "type": "integer"
+          },
+          "patron_payment_instrument_age_seconds": {
+            "title": "Patron Payment Instrument Age Seconds",
+            "type": "number"
+          },
+          "patron_recent_sift_payment_abuse_score": {
+            "title": "Patron Recent Sift Payment Abuse Score",
+            "type": "number"
+          },
+          "patron_recent_sift_payment_abuse_score_age_seconds": {
+            "title": "Patron Recent Sift Payment Abuse Score Age Seconds",
+            "type": "number"
+          },
+          "patron_recent_sift_payment_abuse_score_reason": {
+            "title": "Patron Recent Sift Payment Abuse Score Reason",
+            "type": "string"
+          },
+          "patron_recent_sift_score_age_seconds": {
+            "title": "Patron Recent Sift Score Age Seconds",
+            "type": "number"
+          },
+          "patron_recent_sift_score_legacy": {
+            "title": "Patron Recent Sift Score Legacy",
+            "type": "number"
+          },
+          "patron_recent_sift_score_reason": {
+            "title": "Patron Recent Sift Score Reason",
+            "type": "string"
+          },
+          "patron_user_id": {
+            "title": "Patron User Id",
+            "type": "integer"
+          },
+          "payment_instrument_last_four": {
+            "title": "Payment Instrument Last Four",
+            "type": "integer"
+          },
+          "payment_instrument_merchant": {
+            "title": "Payment Instrument Merchant",
+            "type": "string"
+          },
+          "payment_instrument_other_user_count": {
+            "title": "Payment Instrument Other User Count",
+            "type": "integer"
+          },
+          "payment_instrument_service": {
+            "title": "Payment Instrument Service",
+            "type": "string"
+          },
+          "payout_instrument_added": {
+            "title": "Payout Instrument Added",
+            "type": "boolean"
+          },
+          "pledge_amount_cents": {
+            "title": "Pledge Amount Cents",
+            "type": "integer"
+          },
+          "pledge_amount_usd": {
+            "title": "Pledge Amount Usd",
+            "type": "integer"
+          },
+          "pledge_has_tier": {
+            "title": "Pledge Has Tier",
+            "type": "boolean"
+          },
+          "pledge_tier_amount_usd": {
+            "title": "Pledge Tier Amount Usd",
+            "type": "integer"
+          },
+          "snapshot_id": {
+            "title": "Snapshot Id",
+            "type": "string"
+          },
+          "user_agent_browser": {
+            "title": "User Agent Browser",
+            "type": "string"
+          },
+          "user_agent_device": {
+            "title": "User Agent Device",
+            "type": "string"
+          },
+          "user_agent_os": {
+            "title": "User Agent Os",
+            "type": "string"
+          },
+          "user_agent_os_version": {
+            "title": "User Agent Os Version",
+            "type": "string"
+          },
+          "user_pledge_to_creators_fraudsters": {
+            "title": "User Pledge To Creators Fraudsters",
+            "type": "integer"
+          },
+          "user_pledge_to_creators_not_fraudsters": {
+            "title": "User Pledge To Creators Not Fraudsters",
+            "type": "integer"
+          },
+          "payment_instrument_country_code": {
+            "title": "Payment Instrument Country Code",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "HealthState": {
+        "title": "HealthState",
+        "enum": [
+          "Okay",
+          "PartiallyWorking",
+          "NotWorking"
+        ],
+        "description": "An enumeration."
+      },
+      "HealthStatus": {
+        "title": "HealthStatus",
+        "required": [
+          "state",
+          "server"
+        ],
+        "type": "object",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/HealthState"
+          },
+          "server": {
+            "title": "Server",
+            "type": "boolean"
+          },
+          "database": {
+            "title": "Database",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "PaymentInstrument": {
+        "title": "PaymentInstrument",
+        "required": [
+          "instrument_id",
+          "instrument_provider",
+          "payment_type"
+        ],
+        "type": "object",
+        "properties": {
+          "instrument_id": {
+            "title": "Instrument Id",
+            "type": "string"
+          },
+          "instrument_provider": {
+            "title": "Instrument Provider",
+            "type": "string"
+          },
+          "payment_type": {
+            "title": "Payment Type",
+            "type": "string"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "bank_account": {
+            "$ref": "#/components/schemas/BankAccount"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "Payout": {
+        "title": "Payout",
+        "required": [
+          "user",
+          "payout_balance_cents_USD",
+          "total_payout_cents_USD",
+          "payout_service"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "payout_balance_cents_USD": {
+            "title": "Payout Balance Cents Usd",
+            "type": "integer"
+          },
+          "total_payout_cents_USD": {
+            "title": "Total Payout Cents Usd",
+            "type": "integer"
+          },
+          "payout_service": {
+            "title": "Payout Service",
+            "type": "string"
+          },
+          "last_payout_timestamp": {
+            "title": "Last Payout Timestamp",
+            "type": "number"
+          },
+          "payout_locks": {
+            "title": "Payout Locks",
+            "type": "array",
+            "items": {}
+          },
+          "exemptions": {
+            "title": "Exemptions",
+            "type": "array",
+            "items": {}
+          }
+        }
+      },
+      "PayoutApproval": {
+        "title": "PayoutApproval",
+        "required": [
+          "status",
+          "payout_review_required",
+          "idv_required",
+          "idv_intent"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "payout_review_required": {
+            "title": "Payout Review Required",
+            "type": "boolean"
+          },
+          "idv_required": {
+            "title": "Idv Required",
+            "type": "boolean"
+          },
+          "idv_intent": {
+            "title": "Idv Intent",
+            "type": "object"
+          }
+        }
+      },
+      "Status": {
+        "title": "Status",
+        "enum": [
+          "new",
+          "pending",
+          "canceled",
+          "approved",
+          "needs_id_verification",
+          "denied"
+        ],
+        "description": "An enumeration."
+      },
+      "User": {
+        "title": "User",
+        "required": [
+          "user_id",
+          "first_name",
+          "last_name",
+          "created_at"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "integer"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "country": {
+            "title": "Country",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "exemptions": {
+            "title": "Exemptions",
+            "type": "array",
+            "items": {},
+            "default": []
+          },
+          "payout_reviews": {
+            "title": "Payout Reviews",
+            "type": "array",
+            "items": {},
+            "default": []
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "health",
+      "description": "Health check API for Fraud Service"
+    },
+    {
+      "name": "events",
+      "description": "Consumer for external events."
+    },
+    {
+      "name": "approvals",
+      "description": "Provides Fraud approvals for a given resource"
+    }
+  ]
+}

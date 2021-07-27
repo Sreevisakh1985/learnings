@@ -1,0 +1,46 @@
+2021-02-08T16:19:46,730 Using pip 20.2.4 from /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip (python 3.8)
+2021-02-08T16:19:46,732 Non-user install because site-packages writeable
+2021-02-08T16:19:46,751 Created temporary directory: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-ephem-wheel-cache-uaq90bnl
+2021-02-08T16:19:46,752 Created temporary directory: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-tracker-b4w5tuhe
+2021-02-08T16:19:46,752 Initialized build tracking at /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-tracker-b4w5tuhe
+2021-02-08T16:19:46,752 Created build tracker: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-tracker-b4w5tuhe
+2021-02-08T16:19:46,752 Entered build tracker: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-tracker-b4w5tuhe
+2021-02-08T16:19:46,752 Created temporary directory: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-install-1h_onods
+2021-02-08T16:19:46,755 Collecting git+ssh://****@github.com:Patreon/fraud-service.git@f478bbb361cf4fcb1d244e8f7ec8852a1c951f42
+2021-02-08T16:19:46,756   Created temporary directory: /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-build-as7rin4g
+2021-02-08T16:19:46,756   Cloning ssh://****@github.com:Patreon/fraud-service.git (to revision f478bbb361cf4fcb1d244e8f7ec8852a1c951f42) to /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-build-as7rin4g
+2021-02-08T16:19:46,798 ERROR: Command errored out with exit status 128: git clone -q 'ssh://****@github.com:Patreon/fraud-service.git' /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-build-as7rin4g Check the logs for full command output.
+2021-02-08T16:19:46,799 Exception information:
+2021-02-08T16:19:46,799 Traceback (most recent call last):
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/cli/base_command.py", line 228, in _main
+2021-02-08T16:19:46,799     status = self.run(options, args)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/cli/req_command.py", line 182, in wrapper
+2021-02-08T16:19:46,799     return func(self, options, args)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/commands/install.py", line 323, in run
+2021-02-08T16:19:46,799     requirement_set = resolver.resolve(
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/resolution/legacy/resolver.py", line 183, in resolve
+2021-02-08T16:19:46,799     discovered_reqs.extend(self._resolve_one(requirement_set, req))
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/resolution/legacy/resolver.py", line 388, in _resolve_one
+2021-02-08T16:19:46,799     abstract_dist = self._get_abstract_dist_for(req_to_install)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/resolution/legacy/resolver.py", line 340, in _get_abstract_dist_for
+2021-02-08T16:19:46,799     abstract_dist = self.preparer.prepare_linked_requirement(req)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/operations/prepare.py", line 467, in prepare_linked_requirement
+2021-02-08T16:19:46,799     local_file = unpack_url(
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/operations/prepare.py", line 239, in unpack_url
+2021-02-08T16:19:46,799     unpack_vcs_link(link, location)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/operations/prepare.py", line 99, in unpack_vcs_link
+2021-02-08T16:19:46,799     vcs_backend.unpack(location, url=hide_url(link.url))
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/vcs/versioncontrol.py", line 733, in unpack
+2021-02-08T16:19:46,799     self.obtain(location, url=url)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/vcs/versioncontrol.py", line 641, in obtain
+2021-02-08T16:19:46,799     self.fetch_new(dest, url, rev_options)
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/vcs/git.py", line 230, in fetch_new
+2021-02-08T16:19:46,799     self.run_command(make_command('clone', '-q', url, dest))
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/vcs/versioncontrol.py", line 771, in run_command
+2021-02-08T16:19:46,799     return call_subprocess(cmd, cwd,
+2021-02-08T16:19:46,799   File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/pip/_internal/vcs/versioncontrol.py", line 166, in call_subprocess
+2021-02-08T16:19:46,799     raise SubProcessError(exc_msg)
+2021-02-08T16:19:46,799 pip._internal.exceptions.SubProcessError: Command errored out with exit status 128: git clone -q 'ssh://****@github.com:Patreon/fraud-service.git' /private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-build-as7rin4g Check the logs for full command output.
+2021-02-08T16:19:46,847 WARNING: You are using pip version 20.2.4; however, version 21.0.1 is available.
+2021-02-08T16:19:46,847 You should consider upgrading via the '/Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8 -m pip install --upgrade pip' command.
+2021-02-08T16:19:46,847 Removed build tracker: '/private/var/folders/sx/08ffxgcs4qv542km9gw0h08c0000gp/T/pip-req-tracker-b4w5tuhe'
