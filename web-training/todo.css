@@ -1,0 +1,17 @@
+body {
+	color: rgb(124,044,211);
+}
+
+li {
+	border: 2px black solid
+}
+
+#sleep {
+	background: yellow
+}
+
+.classlist {
+	color: rgb(122,200,244);
+	text-decoration: underline;
+}
+

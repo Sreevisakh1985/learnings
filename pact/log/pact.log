@@ -1,0 +1,54 @@
+# Logfile created on 2021-02-15 09:10:22 -0800 by logger.rb/47272
+I, [2021-02-15T09:10:22.864328 #45621]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:10:22.864442 #45621]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:10:22.864466 #45621] DEBUG -- : body :
+I, [2021-02-15T09:10:22.879837 #45621]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:10:22.879972 #45621]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:10:22.880003 #45621] DEBUG -- : body :
+I, [2021-02-15T09:25:16.980029 #45936]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:25:16.980492 #45936]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:25:16.980540 #45936] DEBUG -- : body :
+I, [2021-02-15T09:25:16.994362 #45936]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:25:16.994478 #45936]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:25:16.994506 #45936] DEBUG -- : body :
+I, [2021-02-15T09:33:10.905763 #46221]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:33:10.906314 #46221]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:33:10.906342 #46221] DEBUG -- : body :
+I, [2021-02-15T09:33:10.922858 #46221]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:33:10.923023 #46221]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:33:10.923083 #46221] DEBUG -- : body :
+I, [2021-02-15T09:34:33.565542 #46260]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:34:33.565670 #46260]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:34:33.565696 #46260] DEBUG -- : body :
+I, [2021-02-15T09:34:33.578412 #46260]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:34:33.578524 #46260]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:34:33.578551 #46260] DEBUG -- : body :
+I, [2021-02-15T09:36:53.288864 #46366]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:36:53.289548 #46366]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:36:53.289594 #46366] DEBUG -- : body :
+I, [2021-02-15T09:36:53.303944 #46366]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:36:53.304147 #46366]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:36:53.304205 #46366] DEBUG -- : body :
+I, [2021-02-15T09:37:12.789663 #46384]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T09:37:12.790124 #46384]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:37:12.790154 #46384] DEBUG -- : body :
+I, [2021-02-15T09:37:12.803290 #46384]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T09:37:12.803405 #46384]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T09:37:12.803431 #46384] DEBUG -- : body :
+I, [2021-02-15T11:44:42.493313 #47735]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T11:44:42.494533 #47735]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T11:44:42.494566 #47735] DEBUG -- : body :
+I, [2021-02-15T11:44:42.507469 #47735]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T11:44:42.507590 #47735]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T11:44:42.507619 #47735] DEBUG -- : body :
+I, [2021-02-15T12:03:31.708598 #48075]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T12:03:31.708737 #48075]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T12:03:31.708772 #48075] DEBUG -- : body :
+I, [2021-02-15T12:03:31.721447 #48075]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has a matching body'
+I, [2021-02-15T12:03:31.721592 #48075]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T12:03:31.721626 #48075] DEBUG -- : body :
+I, [2021-02-15T12:08:41.363693 #48144]  INFO -- : Running example 'Verifying a pact between UserConsumer and Provider Given User John Exists get user with GET /user/Mickey returns a response which has status code 200'
+I, [2021-02-15T12:08:41.364387 #48144]  INFO -- : Sending GET request to path: "/user/Mickey" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"User John Exists"}]}, see debug logs for body
+D, [2021-02-15T12:08:41.364418 #48144] DEBUG -- : body :
+I, [2021-02-15T12:08:41.387551 #48144]  INFO -- : Received response with status: 404, headers: {"Date"=>"Mon, 15 Feb 2021 20:08:40 GMT", "Server"=>"uvicorn", "Content-Length"=>"27", "Content-Type"=>"application/json"}, see debug logs for body
+D, [2021-02-15T12:08:41.387707 #48144] DEBUG -- : body: {"detail":"User not found"}

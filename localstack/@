@@ -1,0 +1,22 @@
+IgnoreUnknown UseKeychain
+
+
+
+
+#Host * 
+# UseKeychain yes
+IgnoreUnknown UseKeychain
+UseKeychain yes
+
+Host shell
+ User smuraleedharan
+ HostName shell.internal.patreon.com
+ IdentityFile ~/.ssh/id_ed25519
+ ForwardAgent yes
+
+Host devx
+ User ansible
+ HostName 172.31.35.122
+ IdentityFile ~/.ssh/id_ed25519
+ ForwardAgent yes
+ StrictHostKeyChecking no

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Forms in html</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <!-- 
+	<form action="http://wikipedia.com" method="GET">
+		<label>Name <input type="text" placeholder="Name" name="Name"></label>
+		<label>Password <input type="text" placeholder="password" name="password"></label>
+		<input type="submit" name="">
+	</form>
+ -->
+    <form action="http://wikipedia.com" method="GET">
+        <label for="username">Name </label>
+        <input id="username" type="text" placeholder="Name" name="Name" required>
+        <label for="password">Password</label>
+        <input type="text" placeholder="password" id="password" name="Password" required></label>
+        <label for="email">Email</label>
+        <input type="email" placeholder="Email" id="email" name="Email" required></label>
+        <p>Gender</p>
+        <label> Male <input name="gender" type="radio" value="M"></label>
+        <label> Female <input name="gender" type="radio" value="F"></label>
+        <p>Choose color</p>
+        <select name="color">
+            <option>Red</option>
+            <option>Yellow</option>
+            <option>Blue</option>
+        </select>
+        <p></p>
+        <input type="submit" name="GO">
+    </form>
+</body>
+
+</html>

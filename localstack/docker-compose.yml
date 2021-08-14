@@ -1,0 +1,10 @@
+services:
+  localstack:
+    container_name: localstack
+    image: localstack/localstack
+    environment:
+      - HOSTNAME_EXTERNAL=localhost
+      - SERVICES=sqs:4576,dynamodb:4577
+    ports:
+      - "4576:4576"
+      - "4577:4577"     
